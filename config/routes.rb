@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   
   root 'lottoes#lottoes_view'
-  get 'lottoes/lottoes_view' => 'lottoes#loTToes-view'
+  get 'lottoes/lottoes_view' => 'lottoes#lottoes_view'
+  get 'lottoes/write' => 'lottoes#write'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

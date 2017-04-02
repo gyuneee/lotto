@@ -1,9 +1,18 @@
 <h1><%=  @show %></h1>
 <h1><%=  @show2 %></h1>
-<h1><%=  @no1 %></h1>
-<h1><%=  @no2 %></h1>
-<h1><%=  @no3 %></h1>
-<h1><%=  @no4 %></h1>
-<h1><%=  @no5 %></h1>
-<h1><%=  @haha %></h1>
+<h1><%= @haha %></h1>
 <h1><%=  @compare %></h1>
+<div background-color="black">
+    <h1>결과가 어땠나요?</h1>
+        <form action="/lottoes/write" method="get">
+            <div class="form-group">
+                <label for="exampleInputEmail1">추출 번호</label>
+                <input type="text" name='numbers6' value="<%= @numbers6%>" class="form-control" id="exampleInputEmail1" placeholder="번호">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">당첨 결과</label>
+                <input type="text" name='resultvalue' value='<%= @resultvalue%>' class="form-control" id="exampleInputPassword1" placeholder="결과값"></textarea>
+            </div>
+        <button automatically=true type="submit" class="btn btn-default">Submit</button>
+        </form>
+</div>

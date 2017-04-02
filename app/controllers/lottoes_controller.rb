@@ -8,8 +8,8 @@ class LottoesController < ApplicationController
         # 배열 로또 번호 1~45
         
         lotto_numbers=(1..45).to_a
-        numbers6=lotto_numbers.sample(6).sort
-        @show = "당신의 행운의 번호는 #{numbers6} 이구요"
+        @numbers6=lotto_numbers.sample(6).sort
+        @show = "당신의 행운의 번호는 #{@numbers6} 이구요"
         
         
         
@@ -21,40 +21,56 @@ class LottoesController < ApplicationController
         
         bnusNo=lotto_hash["bnusNo"]
         
-        realnum=[]
+        @realnum=[]
         i=1
         while i < 7
-        realnum.push(lotto_hash["drwtNo#{i}"])
+        @realnum.push(lotto_hash["drwtNo#{i}"])
         i+=1
         end
         
-        @show2 = "이번주 당첨번호는 #{realnum} 보너스 번호는 #{bnusNo} 입니당ㅎㅎ"
+        @show2 = "이번주 당첨번호는 #{@realnum} 보너스 번호는 #{bnusNo} 입니당ㅎㅎ"
         
-        hi=(numbers6-realnum).count
+        realnum=@realnum
+        hi=(@numbers6-realnum).count
         
-        case hi
-        when 0
-            @no1 = "와 대박 1등임ㅠㅠㅠ."
-        when 1
-            if (numbers6-realnum)==bnusNo
-                @no2 = "와 대박 2등임."
-            else 
-                @no3 = "와 대박 3등임."
+         @resultvalue=case hi
+            when 0
+                then "1등"
+            when 1
+                then
+                    if (numbers6-realnum)==bnusNo
+                         "2등"
+                    else 
+                         "3등"
+                    end
+            when 2
+                then "4등"
+            when 3
+                then "5등"
+            when 4
+                then "꽝"
+            when 5
+                then "꽝"
+            when 6
+                then "꽝"
             end
-        when 2
-            @no4 = "에이 아쉽다 4등임."
-        when 3
-            @no5 = "에이 아쉽다 5등임."
-        when 4
-            @haha = "그래서 당신은 꽝 ㅎ"
-        when 5
-            @haha = "그래서 당신은 꽝 ㅎ"
-        when 6
-            @haha = "그래서 당신은 꽝 ㅎ"
-        end
         #gi는 겹치지 않는번호고 ji는 겹치는 번호
-        gi=(numbers6-realnum).to_a
-        ji=(numbers6-gi).to_a
+        gi=(@numbers6-realnum).to_a
+        ji=(@numbers6-gi).to_a
+        @haha ="당신은" + @resultvalue + "입니다"
         @compare = "이거 겹쳤어요 ㅎㅎ#{ji}"
+    end
+    def write
+        
+        vari=Board.new
+        vari.board_title=params[:numbers6]
+        vari.board_content=params[:resultvalue]
+        vari.save
+        
+        @gol = Board.all
+        
+        @numbers6 = params[:numbers6]
+        @resultvalue = params[:resultvalue]
+
     end
 end
