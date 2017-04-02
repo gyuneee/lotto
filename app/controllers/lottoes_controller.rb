@@ -57,7 +57,7 @@ class LottoesController < ApplicationController
         #gi는 겹치지 않는번호고 ji는 겹치는 번호
         gi=(@numbers6-realnum).to_a
         ji=(@numbers6-gi).to_a
-        @haha ="당신은" + @resultvalue + "입니다"
+        @haha ="결과는 " + "'#{@resultvalue}'" + " 입니다"
         @compare = "이거 겹쳤어요 ㅎㅎ#{ji}"
     end
     def write
